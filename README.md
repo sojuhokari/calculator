@@ -36,7 +36,7 @@ These are the things that we'll hopefully learn by writing all of this
 
 ## Contents
 
-[`cargo.toml`](cargo.toml) contains all the project metadata. We don't need to worry about that yet.
+[`Cargo.toml`](Cargo.toml) contains all the project metadata. We don't need to worry about that yet.
 
 [`src/main.rs`](src/main.rs) contains the entrypoint to our program – the `main()` function. We use a `while` loop to keep the program going until the user enters `q` to quit, and we use Rust's `match` expression to handle errors from three functions: the lexer, parser, and interpreter.
 
