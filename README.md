@@ -4,6 +4,10 @@ Here's the document with an introduction to Rust: [`example.rs`](example.rs)
 
 This is the source code for a project to help people learn Rust.
 
+To run this calculator, download the entire repo (that green button up above that lets you download a zip) and then run "cargo run" in the root directory.
+
+You can use the calculator to add, subtract, multiply, and divide. And you can use parenthesis!!! So if you type `2 * (4 + 5)` it'll return `18`.
+
 ## Goals!
 
 These are the things that we'll hopefully learn by writing all of this
