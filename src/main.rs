@@ -14,7 +14,7 @@ fn main() {
     println!("                Enter any expression on the following line:");
 
     while let Ok(input) = get_input() {
-        if input == String::from("q\n") {
+        if input == if cfg!(windows) { String::from("q\r\n") } else { String::from("q\n") } {
             break;
         }
 

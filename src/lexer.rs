@@ -53,6 +53,12 @@ pub fn lex(string: &str) -> Result<Vec<Token>, LexerError> {
             ')' => Token::CloseParenthesis,
             ' ' | '\t' | '\n' => {
                 continue;
+            },
+            '\r' => {
+                if let Some('\n') = iter.peek() {
+                    iter.next();
+                }
+                continue;
             }
             _ => {
                 return Err(LexerError::UnknownToken(character))
