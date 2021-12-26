@@ -1,0 +1,198 @@
+// PROGRAM 1
+fn main() {
+    // declaring a mutable string that's empty so we can read into it
+    let mut first_number_string = String::new();
+    // Using the *standard library* to create a stdin object, call the read_line method. If you enter "hello" on the terminal, and press "enter", the first_number_string will actually not be just "hello", but will actually be "hello\n" on a mac and "hello\r\n" on a windows computer
+    std::io::stdin().read_line(&mut first_number_string).unwrap();
+    // So, here we have to take off the last letter of the string:
+    first_number_string.pop();
+    // IF YOU'RE ON WINDOWS:
+    // first_number_string.pop(); // again
+    let first_number: f64 = first_number_string.parse().unwrap();
+    println!("The first number is: {}", first_number);
+
+    let mut second_number_string = String::new();
+    std::io::stdin().read_line(&mut second_number_string).unwrap();
+    second_number_string.pop();
+    // IF YOU'RE ON WINDOWS:
+    // first_number_string.pop(); // again
+    let second_number: f64 = second_number_string.parse().unwrap();
+
+    let result = first_number + second_number;
+    println!("The result is: {}", result);
+}
+
+// PROGRAM 2
+fn main() {
+    let first_number = get_number();
+    let second_number = get_number();
+
+    let result = first_number + second_number;
+    println!("The result is: {}", result);
+}
+
+fn get_number() -> f64 {
+    let mut number_string = String::new();
+    std::io::stdin().read_line(&mut number_string).unwrap();
+    number_string.pop();
+    let number: f64 = number_string.parse().unwrap();
+    number
+}
+
+// PROGRAM 3
+// Here, we're going to create an enumeration that represents the four operations we can do: +, -, *, /
+#[derive(Debug)]
+enum Operation {
+    Plus,
+    Minus,
+    Times,
+    Divide, // This last comma is optional
+}
+
+fn main() {
+    // // To use the type we just created:
+    // let operation = Operation::Plus;
+    // println!("The operation is: {:?}", operation);
+
+    let first_number = get_number();
+
+    // declare a new empty string
+    let mut operation_string = String::new();
+    // fill the empty string with the operation that was typed into the terminal
+    std::io::stdin().read_line(&mut operation_string).unwrap();
+    operation_string.pop();
+    // on windows:
+    // operation_string.pop();
+    // convert the operation string into the Operation type:
+    let operation = match operation_string.as_str() {
+        "+" => Operation::Plus,
+        "-" => Operation::Minus,
+        "*" => Operation::Times,
+        "/" => Operation::Divide,
+        _ => panic!("PLEASE PUT IN AN ACTUAL OPERATOR AND NOT WHATEVER YOU JUST WROTE")
+     };
+
+     // String type is slower, because it's on the heap, but it's also more versatile bc it's on the heap
+     // str type is faster, but less useful bc it's on the stack so can't change size (or really change at all)
+
+    let second_number = get_number();
+
+    let result = match operation {
+        Operation::Plus => first_number + second_number,
+        Operation::Minus => first_number - second_number,
+        Operation::Times => first_number * second_number,
+        Operation::Divide => first_number / second_number,
+    };
+    
+    println!("The result is: {}", result);
+}
+
+fn get_number() -> f64 {
+    let mut number_string = String::new();
+    std::io::stdin().read_line(&mut number_string).unwrap();
+    number_string.pop();
+    let number: f64 = number_string.parse().unwrap();
+    number
+}
+
+
+// PROGRAM 4
+#[derive(Debug)]
+enum Operation {
+    Plus,
+    Minus,
+    Times,
+    Divide, // This last comma is optional
+}
+
+fn main() {
+    calculate();
+}
+
+fn calculate() {
+    let first_number = get_number();
+
+    let mut operation_string = String::new();
+    std::io::stdin().read_line(&mut operation_string).unwrap();
+    operation_string.pop();
+    let operation = match operation_string.as_str() {
+        "+" => Operation::Plus,
+        "-" => Operation::Minus,
+        "*" => Operation::Times,
+        "/" => Operation::Divide,
+        _ => panic!("PLEASE PUT IN AN ACTUAL OPERATOR AND NOT WHATEVER YOU JUST WROTE")
+     };
+
+    let second_number = get_number();
+
+    let result = match operation {
+        Operation::Plus => first_number + second_number,
+        Operation::Minus => first_number - second_number,
+        Operation::Times => first_number * second_number,
+        Operation::Divide => first_number / second_number,
+    };
+    
+    println!("The result is: {}", result);
+
+    calculate();
+}
+
+fn get_number() -> f64 {
+    let mut number_string = String::new();
+    std::io::stdin().read_line(&mut number_string).unwrap();
+    number_string.pop();
+    let number: f64 = number_string.parse().unwrap();
+    number
+}
+
+// PROGRAM 5 INFINITE LOOP
+#[derive(Debug)]
+enum Operation {
+    Plus,
+    Minus,
+    Times,
+    Divide, // This last comma is optional
+    Exponent,
+}
+
+fn main() {
+    calculate();
+}
+
+fn calculate() {
+    loop {
+        let first_number = get_number();
+
+        let mut operation_string = String::new();
+        std::io::stdin().read_line(&mut operation_string).unwrap();
+        operation_string.pop();
+        let operation = match operation_string.as_str() {
+            "+" => Operation::Plus,
+            "-" => Operation::Minus,
+            "*" => Operation::Times,
+            "/" => Operation::Divide,
+            "^" => Operation::Exponent,
+            _ => panic!("PLEASE PUT IN AN ACTUAL OPERATOR AND NOT WHATEVER YOU JUST WROTE")
+        };
+
+        let second_number = get_number();
+
+        let result = match operation {
+            Operation::Plus => first_number + second_number,
+            Operation::Minus => first_number - second_number,
+            Operation::Times => first_number * second_number,
+            Operation::Divide => first_number / second_number,
+            Operation::Exponent => first_number.powf(second_number),
+        };
+        
+        println!("The result is: {}", result);
+    }
+}
+
+fn get_number() -> f64 {
+    let mut number_string = String::new();
+    std::io::stdin().read_line(&mut number_string).unwrap();
+    number_string.pop();
+    let number: f64 = number_string.parse().unwrap();
+    number
+}
